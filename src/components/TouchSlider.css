@@ -1,0 +1,39 @@
+.touch-slider {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.touch-slider-label {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+.touch-slider-options {
+  display: flex;
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  padding: var(--space-xs);
+  gap: var(--space-xs);
+}
+
+.touch-slider-option {
+  flex: 1;
+  padding: var(--space-sm) var(--space-md);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-text-muted);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+}
+
+.touch-slider-option:hover:not(.touch-slider-option--active) {
+  color: var(--color-text);
+  background: var(--color-surface-hover);
+}
+
+.touch-slider-option--active {
+  background: var(--color-accent);
+  color: var(--color-bg);
+}

@@ -1,0 +1,124 @@
+.response-display {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-md);
+  background: var(--color-bg-elevated);
+  border-radius: var(--radius-md);
+}
+
+.response-display--empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.response-empty {
+  text-align: center;
+  padding: var(--space-xl);
+  max-width: 300px;
+}
+
+.response-empty-text {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+}
+
+.response-entry {
+  margin-bottom: var(--space-lg);
+}
+
+.response-entry:last-child {
+  margin-bottom: 0;
+}
+
+.response-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
+}
+
+.response-thumb {
+  width: 48px;
+  height: 27px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border-subtle);
+}
+
+.response-time {
+  font-size: var(--text-xs);
+  color: var(--color-text-subtle);
+}
+
+.response-content {
+  color: var(--color-text);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+.response-entry--loading {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.response-thinking {
+  display: flex;
+  gap: 4px;
+  padding: var(--space-md);
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+}
+
+.response-thinking-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--color-text-muted);
+  border-radius: 50%;
+  animation: thinking 1.4s ease-in-out infinite;
+}
+
+.response-thinking-dot:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.response-thinking-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.response-thinking-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes thinking {
+  0%, 60%, 100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  30% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+.response-entry--error {
+  display: flex;
+}
+
+.response-error {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  background: rgba(194, 85, 80, 0.15);
+  border: 1px solid var(--color-error);
+  border-radius: var(--radius-md);
+  color: var(--color-error);
+  font-size: var(--text-sm);
+}
+
+.response-error-icon {
+  flex-shrink: 0;
+}
