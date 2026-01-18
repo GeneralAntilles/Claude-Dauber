@@ -1,0 +1,51 @@
+.capture-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  width: 100%;
+  padding: var(--space-md) var(--space-lg);
+  background: var(--color-accent);
+  color: var(--color-bg);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  transition: background var(--transition-fast), transform var(--transition-fast);
+}
+
+.capture-button:hover:not(:disabled) {
+  background: var(--color-accent-hover);
+}
+
+.capture-button:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.capture-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.capture-button--loading {
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+}
+
+.capture-button-icon {
+  font-size: 1.25em;
+}
+
+.capture-button-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--color-border);
+  border-top-color: var(--color-accent);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

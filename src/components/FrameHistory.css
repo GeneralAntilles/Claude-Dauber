@@ -1,0 +1,100 @@
+.frame-history {
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+}
+
+.frame-history--empty {
+  text-align: center;
+  color: var(--color-text-subtle);
+  font-size: var(--text-sm);
+  padding: var(--space-lg);
+}
+
+.frame-history-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-sm);
+}
+
+.frame-history-title {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+.frame-history-clear-compare {
+  font-size: var(--text-xs);
+  color: var(--color-accent);
+  padding: var(--space-xs) var(--space-sm);
+}
+
+.frame-history-clear-compare:hover {
+  text-decoration: underline;
+}
+
+.frame-history-strip {
+  display: flex;
+  gap: var(--space-sm);
+  overflow-x: auto;
+  padding-bottom: var(--space-xs);
+}
+
+.frame-history-thumb {
+  position: relative;
+  flex-shrink: 0;
+  width: 100px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 2px solid transparent;
+  transition: border-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.frame-history-thumb:hover {
+  border-color: var(--color-border);
+  transform: scale(1.02);
+}
+
+.frame-history-thumb--compare {
+  border-color: var(--color-accent);
+}
+
+.frame-history-thumb--latest {
+  border-color: var(--color-success);
+}
+
+.frame-history-thumb img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.frame-history-time {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 2px var(--space-xs);
+  background: rgba(0, 0, 0, 0.7);
+  font-size: 10px;
+  color: var(--color-text);
+  text-align: center;
+}
+
+.frame-history-badge {
+  position: absolute;
+  top: var(--space-xs);
+  left: var(--space-xs);
+  padding: 1px 4px;
+  background: var(--color-accent);
+  color: var(--color-bg);
+  font-size: 9px;
+  font-weight: 600;
+  border-radius: 2px;
+  text-transform: uppercase;
+}
+
+.frame-history-badge--latest {
+  background: var(--color-success);
+}
