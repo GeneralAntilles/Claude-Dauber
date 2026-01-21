@@ -33,19 +33,32 @@ export function ResponseDisplay({ history, isLoading, error }) {
   return (
     <div className="response-display" ref={containerRef}>
       {history.map((entry, index) => (
-        <div key={index} className="response-entry">
+        <div key={index} className={`response-entry ${entry.role === 'user' && entry.isFollowUp ? 'response-entry--user' : ''}`}>
           {entry.role === 'assistant' && (
             <>
-              <div className="response-header">
-                <img
-                  src={entry.frameThumb}
-                  alt="Captured frame"
-                  className="response-thumb"
-                />
-                <span className="response-time">{formatTime(entry.timestamp)}</span>
-              </div>
+              {entry.frameThumb && (
+                <div className="response-header">
+                  <img
+                    src={entry.frameThumb}
+                    alt="Captured frame"
+                    className="response-thumb"
+                  />
+                  <span className="response-time">{formatTime(entry.timestamp)}</span>
+                </div>
+              )}
+              {!entry.frameThumb && (
+                <div className="response-header">
+                  <span className="response-time">{formatTime(entry.timestamp)}</span>
+                </div>
+              )}
               <div className="response-content">{entry.content}</div>
             </>
+          )}
+          {entry.role === 'user' && entry.isFollowUp && (
+            <div className="response-user-message">
+              <span className="response-time">{formatTime(entry.timestamp)}</span>
+              <div className="response-user-content">{entry.textContent}</div>
+            </div>
           )}
         </div>
       ))}

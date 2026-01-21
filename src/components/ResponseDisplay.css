@@ -122,3 +122,29 @@
 .response-error-icon {
   flex-shrink: 0;
 }
+
+/* User follow-up messages */
+.response-entry--user {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.response-user-message {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  max-width: 80%;
+}
+
+.response-user-message .response-time {
+  margin-bottom: var(--space-xs);
+}
+
+.response-user-content {
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-accent-muted);
+  color: var(--color-text);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  line-height: 1.5;
+}

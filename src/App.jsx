@@ -10,6 +10,7 @@ import { ContextInput } from './components/ContextInput';
 import { ResponseDisplay } from './components/ResponseDisplay';
 import { FrameHistory } from './components/FrameHistory';
 import { ApiKeyInput } from './components/ApiKeyInput';
+import { ChatInput } from './components/ChatInput';
 import './App.css';
 
 function App() {
@@ -105,6 +106,59 @@ function App() {
     }
   }, [apiKey, videoRef, captureFrame, getCompareFrame, touchLevel, sessionContext, history]);
 
+  // Handle follow-up message (text only, references most recent frame)
+  const handleFollowUp = useCallback(async (message) => {
+    if (!apiKey) {
+      setError('Please enter your API key first');
+      return;
+    }
+
+    if (frames.length === 0) {
+      setError('Capture a frame first before asking follow-up questions');
+      return;
+    }
+
+    setIsLoading(true);
+    setError(null);
+
+    // Use the most recent frame for context
+    const mostRecentFrame = frames[0];
+
+    // Call API with follow-up message
+    const result = await getFeedback({
+      apiKey,
+      currentFrame: mostRecentFrame,
+      compareFrame: null,
+      touchLevel,
+      sessionContext,
+      conversationHistory: history,
+      userMessage: message
+    });
+
+    setIsLoading(false);
+
+    if (result.success) {
+      // Add user follow-up message (displayed)
+      const userEntry = {
+        role: 'user',
+        textContent: message,
+        isFollowUp: true,
+        timestamp: new Date()
+      };
+
+      // Add assistant response (no frame thumb for follow-ups)
+      const assistantEntry = {
+        role: 'assistant',
+        content: result.content,
+        timestamp: new Date()
+      };
+
+      setHistory(prev => [...prev, userEntry, assistantEntry]);
+    } else {
+      setError(result.error);
+    }
+  }, [apiKey, frames, touchLevel, sessionContext, history]);
+
   // Keyboard shortcut (spacebar to capture)
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -174,6 +228,14 @@ function App() {
             isLoading={isLoading}
             error={error}
           />
+
+          {frames.length > 0 && (
+            <ChatInput
+              onSubmit={handleFollowUp}
+              isLoading={isLoading}
+              disabled={!apiKey}
+            />
+          )}
         </div>
       </main>
 

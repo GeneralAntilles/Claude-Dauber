@@ -61,10 +61,10 @@ export async function getFeedback({
   compareFrame = null,
   touchLevel = 'balanced',
   sessionContext = '',
-  conversationHistory = []
+  conversationHistory = [],
+  userMessage = null
 }) {
   const systemPrompt = buildSystemPrompt({ touchLevel, sessionContext });
-  const userContent = buildUserContent({ currentFrame, compareFrame });
 
   // Build messages array with history (last 10 exchanges max)
   const messages = [];
@@ -79,10 +79,34 @@ export async function getFeedback({
   }
 
   // Add current request
-  messages.push({
-    role: 'user',
-    content: userContent
-  });
+  if (userMessage) {
+    // Follow-up: text message with reference to recent frame for context
+    const userContent = [
+      {
+        type: 'image',
+        source: {
+          type: 'base64',
+          media_type: 'image/jpeg',
+          data: currentFrame.dataUrl.replace(/^data:image\/\w+;base64,/, '')
+        }
+      },
+      {
+        type: 'text',
+        text: userMessage
+      }
+    ];
+    messages.push({
+      role: 'user',
+      content: userContent
+    });
+  } else {
+    // Initial feedback request
+    const userContent = buildUserContent({ currentFrame, compareFrame });
+    messages.push({
+      role: 'user',
+      content: userContent
+    });
+  }
 
   try {
     const response = await fetch(API_URL, {
